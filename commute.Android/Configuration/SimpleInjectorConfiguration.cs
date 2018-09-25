@@ -1,6 +1,6 @@
 using SimpleInjector;
 
-namespace commute.Droid.Configuration
+namespace commutr.Droid.Configuration
 {
     public static class SimpleInjectorConfiguration
     {

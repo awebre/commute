@@ -1,26 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-
+using commutr.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using commute.Models;
-
-namespace commute.Views
+namespace commutr.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewItemPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Vehicle Item { get; set; }
 
         public NewItemPage()
         {
             InitializeComponent();
 
-            Item = new Item
+            Item = new Vehicle
             {
-                Text = "Item name",
-                Description = "This is an item description."
+                Make = "Item name",
+                Model = "This is an item description."
             };
 
             BindingContext = this;

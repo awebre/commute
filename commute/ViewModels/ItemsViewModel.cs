@@ -2,30 +2,33 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using commutr.Views;
+using commutr.Models;
+using commutr.Services;
 using Xamarin.Forms;
 
-using commute.Models;
-using commute.Views;
-
-namespace commute.ViewModels
+namespace commutr.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<Vehicle> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        private readonly IDataStore<Vehicle> dataStore;
+
+        public ItemsViewModel(IDataStore<Vehicle> dataStore)
         {
+            this.dataStore = dataStore;
+            
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Items = new ObservableCollection<Vehicle>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewItemPage, Vehicle>(this, "AddItem", async (obj, item) =>
             {
-                var newItem = item as Item;
+                var newItem = item as Vehicle;
                 Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
+                await dataStore.AddItemAsync(newItem);
             });
         }
 
@@ -39,7 +42,7 @@ namespace commute.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await dataStore.GetItemsAsync();
                 foreach (var item in items)
                 {
                     Items.Add(item);

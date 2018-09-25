@@ -1,15 +1,13 @@
-﻿using System;
+﻿using commutr.Models;
 
-using commute.Models;
-
-namespace commute.ViewModels
+namespace commutr.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public Vehicle Item { get; set; }
+        public ItemDetailViewModel(Vehicle item = null)
         {
-            Title = item?.Text;
+            Title = item?.Make;
             Item = item;
         }
     }

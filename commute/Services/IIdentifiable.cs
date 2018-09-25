@@ -1,11 +1,7 @@
-﻿using System;
-using SQLite;
-
-namespace commute.Services
+﻿namespace commutr.Services
 {
     public interface IIdentifiable
     {
-        [PrimaryKey, AutoIncrement]
         int Id { get; set; }
     }
 }

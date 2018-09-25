@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SQLite;
 
-namespace commute.Services
+namespace commutr.Services
 {
     public class SqliteDataStore<T> : IDataStore<T> where T : class, IIdentifiable, new()
     {
@@ -11,6 +10,7 @@ namespace commute.Services
         public SqliteDataStore()
         {
             connection = DataContext.GetConnection();
+            connection.CreateTableAsync<T>();
         }
 
         public async Task<int> AddItemAsync(T item)
@@ -20,8 +20,7 @@ namespace commute.Services
 
         public async Task<int> DeleteItemAsync(int id)
         {
-            var item = default(T);
-            item.Id = id;
+            var item = new T {Id = id};
             return await connection.DeleteAsync(item);
         }
 

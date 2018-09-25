@@ -1,6 +1,6 @@
-﻿using System;
-using SimpleInjector;
-namespace commute.Services
+﻿using SimpleInjector;
+
+namespace commutr.Services
 {
     public class DependencyResolver
     {

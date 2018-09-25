@@ -1,33 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using commutr.Models;
+using commutr.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using commute.Models;
-using commute.Views;
-using commute.ViewModels;
-
-namespace commute.Views
+namespace commutr.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemsPage : ContentPage
     {
         ItemsViewModel viewModel;
-
+        
         public ItemsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = App.Resolver.Resolve<ItemsViewModel>();
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
+            var item = args.SelectedItem as Vehicle;
             if (item == null)
                 return;
 

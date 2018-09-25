@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
-
 using Xamarin.Forms;
 
-namespace commute.ViewModels
+namespace commutr.ViewModels
 {
     public class AboutViewModel : BaseViewModel
     {

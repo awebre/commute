@@ -3,17 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using Xamarin.Forms;
-
-using commute.Models;
-using commute.Services;
-
-namespace commute.ViewModels
+namespace commutr.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
-
         bool isBusy = false;
         public bool IsBusy
         {

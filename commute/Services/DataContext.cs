@@ -1,8 +1,8 @@
 ﻿using System;
-using SQLite;
 using System.IO;
+using SQLite;
 
-namespace commute.Services
+namespace commutr.Services
 {
     public static class DataContext
     {

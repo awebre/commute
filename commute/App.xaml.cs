@@ -1,20 +1,24 @@
-﻿using System;
-using commute.Services;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using commute.Views;
+﻿using commutr.Services;
+using commutr.Views;
 using SimpleInjector;
+using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-namespace commute
+namespace commutr
 {
-    public partial class App : Application
+    public partial class App : Xamarin.Forms.Application
     {
 
         public App(Container container)
         {
             InitializeComponent();
 
+            container.Register(typeof(IDataStore<>), typeof(SqliteDataStore<>));
+            container.Register<DependencyResolver>();
+            container.Verify();
+
+            Resolver = container.GetInstance<DependencyResolver>();
+            
             MainPage = new MainPage();
         }
 
@@ -32,5 +36,7 @@ namespace commute
         {
             // Handle when your app resumes
         }
+        
+        public static DependencyResolver Resolver { get; protected set; }
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-
+﻿using commutr.Models;
+using commutr.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using commute.Models;
-using commute.ViewModels;
-
-namespace commute.Views
+namespace commutr.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemDetailPage : ContentPage
@@ -24,10 +21,10 @@ namespace commute.Views
         {
             InitializeComponent();
 
-            var item = new Item
+            var item = new Vehicle
             {
-                Text = "Item 1",
-                Description = "This is an item description."
+                Make = "Item 1",
+                Model = "This is an item description."
             };
 
             viewModel = new ItemDetailViewModel(item);

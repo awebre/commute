@@ -1,6 +1,8 @@
 ﻿using System;
-using commute.Services;
-namespace commute.Models
+using commutr.Services;
+using SQLite;
+
+namespace commutr.Models
 {
     public class Vehicle : IIdentifiable
     {
@@ -8,6 +10,7 @@ namespace commute.Models
         {
         }
 
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
         public string Make { get; set; }

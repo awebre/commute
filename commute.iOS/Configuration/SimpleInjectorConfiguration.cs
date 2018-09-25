@@ -1,8 +1,6 @@
-﻿using System;
-using SimpleInjector;
-using commute.Services;
+﻿using SimpleInjector;
 
-namespace commute.iOS.Configuration
+namespace commutr.iOS.Configuration
 {
     public static class SimpleInjectorConfiguration
     {

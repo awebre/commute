@@ -1,9 +1,7 @@
-﻿using System;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace commute.Views
+namespace commutr.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AboutPage : ContentPage
