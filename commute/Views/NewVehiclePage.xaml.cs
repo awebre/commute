@@ -6,11 +6,11 @@ using Xamarin.Forms.Xaml;
 namespace commutr.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewItemPage : ContentPage
+    public partial class NewVehiclePage : ContentPage
     {
         public Vehicle Item { get; set; }
 
-        public NewItemPage()
+        public NewVehiclePage()
         {
             InitializeComponent();
 
@@ -25,7 +25,7 @@ namespace commutr.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "AddVehicle", Item);
             await Navigation.PopModalAsync();
         }
     }

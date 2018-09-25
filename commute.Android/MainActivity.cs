@@ -2,7 +2,6 @@
 using Android.Content.PM;
 using Android.OS;
 using commutr.Droid.Configuration;
-using commutr.Droid.Resources;
 
 namespace commutr.Droid
 {

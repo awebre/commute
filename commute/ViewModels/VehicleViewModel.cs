@@ -9,22 +9,22 @@ using Xamarin.Forms;
 
 namespace commutr.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class VehicleViewModel : BaseViewModel
     {
         public ObservableCollection<Vehicle> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         private readonly IDataStore<Vehicle> dataStore;
 
-        public ItemsViewModel(IDataStore<Vehicle> dataStore)
+        public VehicleViewModel(IDataStore<Vehicle> dataStore)
         {
             this.dataStore = dataStore;
-            
-            Title = "Browse";
+
+            Title = "Vehicles";
             Items = new ObservableCollection<Vehicle>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Vehicle>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewVehiclePage, Vehicle>(this, "AddItem", async (obj, item) =>
             {
                 var newItem = item as Vehicle;
                 Items.Add(newItem);

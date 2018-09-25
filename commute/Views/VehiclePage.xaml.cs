@@ -7,15 +7,15 @@ using Xamarin.Forms.Xaml;
 namespace commutr.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ItemsPage : ContentPage
+    public partial class VehiclePage : ContentPage
     {
-        ItemsViewModel viewModel;
-        
-        public ItemsPage()
+        VehicleViewModel viewModel;
+
+        public VehiclePage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = App.Resolver.Resolve<ItemsViewModel>();
+            BindingContext = viewModel = App.Resolver.Resolve<VehicleViewModel>();
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -32,7 +32,7 @@ namespace commutr.Views
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+            await Navigation.PushModalAsync(new NavigationPage(new NewVehiclePage()));
         }
 
         protected override void OnAppearing()

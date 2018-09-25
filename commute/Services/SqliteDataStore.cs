@@ -26,12 +26,15 @@ namespace commutr.Services
 
         public async Task<T> GetItemAsync(int id)
         {
+            var table = connection.Table<T>();
             return await connection.Table<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<T>> GetItemsAsync()
         {
-            return await connection.QueryAsync<T>($"SELECT * FROM {nameof(T)}");
+            var table = typeof(T).Name;
+            var result = await connection.QueryAsync<T>(@"SELECT * FROM " + table);
+            return result;
         }
 
         public async Task<int> UpdateItemAsync(T item)
