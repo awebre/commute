@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:commutr.ViewModels;"
+             xmlns:forms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              mc:Ignorable="d"
              x:Class="commutr.Views.VehiclePage" 
-             d:DataContext="{viewModels:ItemsViewModel}"
-             Title="{Binding Title}" x:Name="BrowseItemsPage">
+             d:DataContext="{viewModels:VehicleViewModel}"
+             Title="{Binding Title}" x:Name="VehicleCrudPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked">
             <ToolbarItem.Icon>
@@ -19,14 +20,38 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="ItemsListView" ItemsSource="{Binding Items}" VerticalOptions="FillAndExpand" HasUnevenRows="true" RefreshCommand="{Binding LoadItemsCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement" ItemSelected="OnItemSelected">
+            <ListView x:Name="ItemsListView" 
+                      ItemsSource="{Binding Items}" 
+                      VerticalOptions="FillAndExpand" 
+                      HasUnevenRows="true" 
+                      RefreshCommand="{Binding LoadItemsCommand}" 
+                      IsPullToRefreshEnabled="true" 
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
+                      CachingStrategy="RecycleElement" 
+                      ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="10">
-                                <Label Text="{Binding Make}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
-                                <Label Text="{Binding Model}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
-                            </StackLayout>
+                            <ViewCell.ContextActions>
+                                <MenuItem Command="{Binding BindingContext.MakePrimaryCommand, Source={x:Reference VehicleCrudPage}}" CommandParameter="{Binding .}" Text="Make Primary" IsDestructive="false"></MenuItem>
+                                <MenuItem Command="{Binding BindingContext.DeleteVehicleCommand, Source={x:Reference VehicleCrudPage}}" CommandParameter="{Binding .}" Text="Delete" IsDestructive="true" />
+                            </ViewCell.ContextActions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Row="0" Grid.Column="0" Padding="20" Orientation="Horizontal">
+                                    <Label Text="{Binding Year}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                                    <Label Text="{Binding Make}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                                    <Label Text="{Binding Model}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="16" />
+                                </StackLayout>
+                                <forms:SKCanvasView Grid.Row="0" Grid.Column="1" PaintSurface="OnPainSurface" IsVisible="{Binding IsPrimary}" />
+                            </Grid>
+
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

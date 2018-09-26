@@ -1,6 +1,8 @@
 ﻿using System;
 using commutr.Models;
 using commutr.ViewModels;
+using SkiaSharp;
+using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -35,12 +37,31 @@ namespace commutr.Views
             await Navigation.PushModalAsync(new NavigationPage(new NewVehiclePage()));
         }
 
+        
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
+        }
+
+        private void OnPainSurface(object sender, SKPaintSurfaceEventArgs args)
+        {
+            var info = args.Info;
+            var surface = args.Surface;
+            var canvas = surface.Canvas;
+
+            canvas.Clear();
+            
+            var paint = new SKPaint
+            {
+                Style = SKPaintStyle.Fill,
+                Color = SKColors.Blue,
+                StrokeWidth = 5
+            };
+            
+            canvas.DrawCircle(10, info.Height / 2, 10, paint);
         }
     }
 }

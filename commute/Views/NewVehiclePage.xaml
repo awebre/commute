@@ -4,11 +4,14 @@
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
+        
         <StackLayout Spacing="20" Padding="15">
-            <Label Text="Text" FontSize="Medium" />
+            <Label Text="Make" FontSize="Medium" />
             <Entry Text="{Binding Item.Make}" FontSize="Small" />
-            <Label Text="Description" FontSize="Medium" />
-            <Editor Text="{Binding Item.Model}" FontSize="Small" Margin="0" />
+            <Label Text="Model" FontSize="Medium" />
+            <Entry Text="{Binding Item.Model}" FontSize="Small" />
+            <Label Text="Year" FontSize="Medium" />
+            <Picker SelectedItem="{Binding Item.Year}" ItemsSource="{Binding Years}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

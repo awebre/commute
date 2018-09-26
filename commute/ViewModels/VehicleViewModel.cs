@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using commutr.Views;
 using commutr.Models;
 using commutr.Services;
@@ -24,12 +26,44 @@ namespace commutr.ViewModels
             Items = new ObservableCollection<Vehicle>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewVehiclePage, Vehicle>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewVehiclePage, Vehicle>(this, "AddVehicle", async (obj, item) =>
             {
-                var newItem = item as Vehicle;
+                var newItem = item;
                 Items.Add(newItem);
                 await dataStore.AddItemAsync(newItem);
             });
+
+            DeleteVehicleCommand = new Command<Vehicle>(DeleteVehicle);
+            MakePrimaryCommand = new Command<Vehicle>(MakePrimary);
+        }
+        
+        public ICommand DeleteVehicleCommand { get; }
+        
+        public ICommand MakePrimaryCommand { get; }
+
+        public async void DeleteVehicle(Vehicle vehicle)
+        {
+            var result = await dataStore.DeleteItemAsync(vehicle.Id);
+
+            if (result == 1)
+            {
+                Items.Remove(vehicle);
+            }
+        }
+
+        public async void MakePrimary(Vehicle newPrimary)
+        {
+            var vehicles = await dataStore.GetItemsAsync();
+            var previousPrimary = vehicles.FirstOrDefault(x => x.IsPrimary);
+            if (previousPrimary != null)
+            {
+                previousPrimary.IsPrimary = false;
+                await dataStore.UpdateItemAsync(previousPrimary);
+            }
+
+            newPrimary.IsPrimary = true;
+            await dataStore.UpdateItemAsync(newPrimary);
+            await ExecuteLoadItemsCommand();
         }
 
         async Task ExecuteLoadItemsCommand()

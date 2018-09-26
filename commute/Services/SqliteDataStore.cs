@@ -26,7 +26,6 @@ namespace commutr.Services
 
         public async Task<T> GetItemAsync(int id)
         {
-            var table = connection.Table<T>();
             return await connection.Table<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
