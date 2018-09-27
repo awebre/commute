@@ -34,7 +34,7 @@ namespace commutr.Views
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new NewVehiclePage()));
+            await Navigation.PushAsync(new NewVehiclePage());
         }
 
         

@@ -19,6 +19,10 @@ namespace commutr.Models
 
         public int Year { get; set; }
         
+        public decimal Odometer { get; set; }
+        
+        public string Notes { get; set; }
+        
         public bool IsPrimary { get; set; }
     }
 }

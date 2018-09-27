@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="commutr.Views.NewVehiclePage" Title="New Vehicle">
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="commutr.Views.NewVehiclePage" Title="New Vehicle">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        
         <StackLayout Spacing="20" Padding="15">
-            <Label Text="Make" FontSize="Medium" />
-            <Entry Text="{Binding Item.Make}" FontSize="Small" />
-            <Label Text="Model" FontSize="Medium" />
-            <Entry Text="{Binding Item.Model}" FontSize="Small" />
-            <Label Text="Year" FontSize="Medium" />
-            <Picker SelectedItem="{Binding Item.Year}" ItemsSource="{Binding Years}" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="7*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Text="Make" FontSize="Medium" />
+                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Item.Make}" FontSize="Small" />
+                <Label Grid.Row="1" Grid.Column="0" Text="Model" FontSize="Medium" />
+                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Item.Model}" FontSize="Small" />
+                <Label Grid.Row="2" Grid.Column="0" Text="Year" FontSize="Medium" />
+                <Picker Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Item.Year}" ItemsSource="{Binding Years}" />
+                <Label Grid.Row="3" Grid.Column="0" Text="Odometer" FontSize="Medium" />
+                <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Item.Odometer}" Keyboard="Numeric" />
+            </Grid>
+            <Label Text="Notes" FontSize="Medium" />
+            <Editor Text="{Binding Item.Notes}" BackgroundColor="LightGray" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

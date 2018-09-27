@@ -1,6 +1,7 @@
 ﻿using commutr.Services;
 using commutr.Views;
 using SimpleInjector;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -19,7 +20,7 @@ namespace commutr
 
             Resolver = container.GetInstance<DependencyResolver>();
             
-            MainPage = new VehiclePage();
+            MainPage = new NavigationPage(new VehiclePage());
         }
 
         protected override void OnStart()
