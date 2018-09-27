@@ -6,18 +6,18 @@ using Xamarin.Forms.Xaml;
 namespace commutr.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ItemDetailPage : ContentPage
+    public partial class VehicleDetailsPage : TabbedPage
     {
-        ItemDetailViewModel viewModel;
+        VehicleDetailsViewModel viewModel;
 
-        public ItemDetailPage(ItemDetailViewModel viewModel)
+        public VehicleDetailsPage(VehicleDetailsViewModel viewModel)
         {
             InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
         }
 
-        public ItemDetailPage()
+        public VehicleDetailsPage()
         {
             InitializeComponent();
 
@@ -27,7 +27,7 @@ namespace commutr.Views
                 Model = "This is an item description."
             };
 
-            viewModel = new ItemDetailViewModel(item);
+            viewModel = new VehicleDetailsViewModel(item);
             BindingContext = viewModel;
         }
     }

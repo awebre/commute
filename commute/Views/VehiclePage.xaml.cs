@@ -26,7 +26,7 @@ namespace commutr.Views
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await Navigation.PushAsync(new VehicleDetailsPage(new VehicleDetailsViewModel(item)));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;

@@ -19,7 +19,7 @@ namespace commutr
 
             Resolver = container.GetInstance<DependencyResolver>();
             
-            MainPage = new MainPage();
+            MainPage = new VehiclePage();
         }
 
         protected override void OnStart()
