@@ -5,22 +5,26 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace commutr
 {
     public partial class App : Xamarin.Forms.Application
     {
-
         public App(Container container)
         {
             InitializeComponent();
 
-            container.Register(typeof(IDataStore<>), typeof(SqliteDataStore<>));
             container.Register<DependencyResolver>();
+            
+            container.Register(typeof(IDataStore<>), typeof(SqliteDataStore<>));
+            
+            var rootPage = new NavigationPage(new VehiclePage());
+            container.Register(() => new NavigationService(rootPage));
             container.Verify();
 
             Resolver = container.GetInstance<DependencyResolver>();
-            
-            MainPage = new NavigationPage(new VehiclePage());
+
+            MainPage = rootPage;
         }
 
         protected override void OnStart()
@@ -37,7 +41,8 @@ namespace commutr
         {
             // Handle when your app resumes
         }
-        
+
         public static DependencyResolver Resolver { get; protected set; }
+
     }
 }

@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="commutr.Views.FillUpPage">
     <ContentPage.Content>
-        
+            <StackLayout>
+            <ListView x:Name="ItemsListView" 
+                      ItemsSource="{Binding Items}" 
+                      VerticalOptions="FillAndExpand" 
+                      HasUnevenRows="true" 
+                      RefreshCommand="{Binding LoadItemsCommand}" 
+                      IsPullToRefreshEnabled="true" 
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
+                      CachingStrategy="RecycleElement" 
+                      SelectedItem="{Binding }">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Command="{Binding BindingContext.MakePrimaryCommand, Source={x:Reference VehicleCrudPage}}" CommandParameter="{Binding .}" Text="Make Primary" IsDestructive="false"></MenuItem>
+                                <MenuItem Command="{Binding BindingContext.DeleteVehicleCommand, Source={x:Reference VehicleCrudPage}}" CommandParameter="{Binding .}" Text="Delete" IsDestructive="true" />
+                            </ViewCell.ContextActions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Row="0" Grid.Column="0" Padding="20" Orientation="Horizontal">
+                                    <Label Text="{Binding Year}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                                    <Label Text="{Binding Make}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                                    <Label Text="{Binding Model}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="16" />
+                                </StackLayout>
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

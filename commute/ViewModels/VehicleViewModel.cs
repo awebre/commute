@@ -17,10 +17,13 @@ namespace commutr.ViewModels
         public Command LoadItemsCommand { get; set; }
 
         private readonly IDataStore<Vehicle> dataStore;
+        private readonly NavigationService navigationService;
+        private Vehicle selectedVehicle;
 
-        public VehicleViewModel(IDataStore<Vehicle> dataStore)
+        public VehicleViewModel(IDataStore<Vehicle> dataStore, NavigationService navigationService)
         {
             this.dataStore = dataStore;
+            this.navigationService = navigationService;
 
             Title = "Vehicles";
             Items = new ObservableCollection<Vehicle>();
@@ -40,6 +43,24 @@ namespace commutr.ViewModels
         public ICommand DeleteVehicleCommand { get; }
         
         public ICommand MakePrimaryCommand { get; }
+
+        public Vehicle SelectedVehicle
+        {
+            get => selectedVehicle;
+            set
+            {
+                selectedVehicle = value;
+                var navigate = new Task(async () =>
+                {
+                    await navigationService.PushAsync(
+                        new VehicleDetailsPage(new VehicleDetailsViewModel(selectedVehicle)));
+                });
+                
+                navigate.RunSynchronously();
+
+                selectedVehicle = null;
+            }
+        }
 
         public async void DeleteVehicle(Vehicle vehicle)
         {
