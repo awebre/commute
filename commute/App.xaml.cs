@@ -18,13 +18,11 @@ namespace commutr
             
             container.Register(typeof(IDataStore<>), typeof(SqliteDataStore<>));
             
-            var rootPage = new NavigationPage(new VehiclePage());
-            container.Register(() => new NavigationService(rootPage));
             container.Verify();
 
             Resolver = container.GetInstance<DependencyResolver>();
 
-            MainPage = rootPage;
+            MainPage = new NavigationPage(new VehiclePage());
         }
 
         protected override void OnStart()

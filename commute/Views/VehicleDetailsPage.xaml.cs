@@ -1,4 +1,5 @@
-﻿using commutr.Models;
+﻿using System;
+using commutr.Models;
 using commutr.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -29,6 +30,11 @@ namespace commutr.Views
 
             viewModel = new VehicleDetailsViewModel(item);
             BindingContext = viewModel;
+        }
+
+        private void MenuItem_OnClicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
     }
 }

@@ -17,13 +17,11 @@ namespace commutr.ViewModels
         public Command LoadItemsCommand { get; set; }
 
         private readonly IDataStore<Vehicle> dataStore;
-        private readonly NavigationService navigationService;
         private Vehicle selectedVehicle;
 
-        public VehicleViewModel(IDataStore<Vehicle> dataStore, NavigationService navigationService)
+        public VehicleViewModel(IDataStore<Vehicle> dataStore)
         {
             this.dataStore = dataStore;
-            this.navigationService = navigationService;
 
             Title = "Vehicles";
             Items = new ObservableCollection<Vehicle>();
@@ -48,17 +46,16 @@ namespace commutr.ViewModels
         {
             get => selectedVehicle;
             set
-            {
+            {   
                 selectedVehicle = value;
-                var navigate = new Task(async () =>
-                {
-                    await navigationService.PushAsync(
-                        new VehicleDetailsPage(new VehicleDetailsViewModel(selectedVehicle)));
-                });
-                
-                navigate.RunSynchronously();
 
-                selectedVehicle = null;
+                if (selectedVehicle != null)
+                {
+                    Application.Current.MainPage.Navigation.PushModalAsync(
+                        new VehicleDetailsPage(new VehicleDetailsViewModel(selectedVehicle)));   
+                }
+                
+                OnPropertyChanged();
             }
         }
 
@@ -110,6 +107,15 @@ namespace commutr.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        public void OnAppearing()
+        {
+            SelectedVehicle = null;
+            if (Items.Count == 0)
+            {
+                LoadItemsCommand.Execute(null);
             }
         }
     }

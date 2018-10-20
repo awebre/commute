@@ -11,11 +11,6 @@
              Title="{Binding Title}" x:Name="VehicleCrudPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="UWP" Value="add.png" />
-                </OnPlatform>
-            </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
@@ -28,8 +23,7 @@
                       IsPullToRefreshEnabled="true" 
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
                       CachingStrategy="RecycleElement" 
-                      SelectedItem="{Binding SelectedVehicle}">
-                <!-- ItemSelected="OnItemSelected" -->
+                      SelectedItem="{Binding SelectedVehicle, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

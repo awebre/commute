@@ -20,18 +20,6 @@ namespace commutr.Views
             BindingContext = viewModel = App.Resolver.Resolve<VehicleViewModel>();
         }
 
-        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
-        {
-            var item = args.SelectedItem as Vehicle;
-            if (item == null)
-                return;
-
-            await Navigation.PushAsync(new VehicleDetailsPage(new VehicleDetailsViewModel(item)));
-
-            // Manually deselect item.
-            ItemsListView.SelectedItem = null;
-        }
-
         async void AddItem_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NewVehiclePage());
@@ -41,9 +29,7 @@ namespace commutr.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+            viewModel.OnAppearing();
         }
 
         private void OnPainSurface(object sender, SKPaintSurfaceEventArgs args)

@@ -7,7 +7,7 @@ namespace commutr.ViewModels
         public Vehicle Item { get; set; }
         public VehicleDetailsViewModel(Vehicle item = null)
         {
-            Title = $"{item?.Year.ToString().Substring(2, 3)} {item?.Make} {item?.Model}";
+            Title = $"{item?.Year} {item?.Make} {item?.Model}";
             Item = item;
         }
     }
