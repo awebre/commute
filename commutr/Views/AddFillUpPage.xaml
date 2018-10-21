@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="commutr.Views.AddFillUpPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Date" FontSize="Medium" />
+                    <DatePicker Grid.Row="0" Grid.Column="1" Date="{Binding FillUp.Date}" FontSize="Small" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="Trip Miles" FontSize="Medium" />
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding FillUp.TripMiles}" FontSize="Small"
+                           Keyboard="Numeric" />
+                    <Label Grid.Row="2" Grid.Column="0" Text="Gallons" FontSize="Medium" />
+                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding FillUp.Gallons}" Keyboard="Numeric" />
+                    <Label Grid.Row="3" Grid.Column="0" Text="$/gal" FontSize="Medium" />
+                    <Entry Grid.Row="3" Grid.Column="1" Text="{Binding FillUp.PricePerGallon}" Keyboard="Numeric" />
+                    <Label Grid.Row="4" Grid.Column="0" Text="Total $" />
+                    <Entry Grid.Row="4" Grid.Column="1" Text="{Binding FillUp.Total, Mode=OneWay}" IsEnabled="False" />
+                </Grid>
+                <Label Text="Notes" FontSize="Medium" />
+                <Editor Text="{Binding FillUp.Notes}" BackgroundColor="LightGray" HeightRequest="200" />
+                <Label Text="Fuel Economy" FontSize="Medium" />
+                <Entry Text="{Binding FillUp.FuelEconomy, Mode=OneWay}" IsEnabled="False" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

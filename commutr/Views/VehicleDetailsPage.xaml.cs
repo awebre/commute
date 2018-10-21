@@ -34,7 +34,7 @@ namespace commutr.Views
 
         private void MenuItem_OnClicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage.Navigation.PopModalAsync();
+            Application.Current.MainPage =  new NavigationPage(new VehiclePage());
         }
     }
 }

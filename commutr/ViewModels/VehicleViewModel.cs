@@ -37,25 +37,24 @@ namespace commutr.ViewModels
             DeleteVehicleCommand = new Command<Vehicle>(DeleteVehicle);
             MakePrimaryCommand = new Command<Vehicle>(MakePrimary);
         }
-        
+
         public ICommand DeleteVehicleCommand { get; }
-        
+
         public ICommand MakePrimaryCommand { get; }
 
         public Vehicle SelectedVehicle
         {
             get => selectedVehicle;
             set
-            {   
+            {
                 selectedVehicle = value;
 
                 if (selectedVehicle != null)
                 {
-                    Application.Current.MainPage.Navigation.PushModalAsync(
-                        new VehicleDetailsPage(new VehicleDetailsViewModel(selectedVehicle)));   
+                    var detailsPage =
+                        new NavigationPage(new VehicleDetailsPage(new VehicleDetailsViewModel(selectedVehicle)));
+                    Application.Current.MainPage = detailsPage;
                 }
-                
-                OnPropertyChanged();
             }
         }
 

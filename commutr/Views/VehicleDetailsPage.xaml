@@ -7,9 +7,6 @@
     <TabbedPage.ToolbarItems>
         <ToolbarItem Text="Vehicles" Clicked="MenuItem_OnClicked"></ToolbarItem>
     </TabbedPage.ToolbarItems>
-    <NavigationPage Title="Fill Ups">
-        <x:Arguments>
             <views:FillUpPage />
-        </x:Arguments>
-    </NavigationPage>
+
 </TabbedPage>

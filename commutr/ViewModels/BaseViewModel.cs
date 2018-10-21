@@ -12,28 +12,28 @@ namespace commutr.ViewModels
         public bool IsBusy
         {
             get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            set { isBusy = value; }
         }
 
         string title = string.Empty;
         public string Title
         {
             get { return title; }
-            set { SetProperty(ref title, value); }
+            set { title = value; }
         }
         
-        protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName]string propertyName = "",
-            Action onChanged = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(backingStore, value))
-                return false;
-
-            backingStore = value;
-            onChanged?.Invoke();
-            OnPropertyChanged(propertyName);
-            return true;
-        }
+//        protected bool SetProperty<T>(ref T backingStore, T value,
+//            [CallerMemberName]string propertyName = "",
+//            Action onChanged = null)
+//        {
+//            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+//                return false;
+//
+//            backingStore = value;
+//            onChanged?.Invoke();
+//            OnPropertyChanged(propertyName);
+//            return true;
+//        }
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

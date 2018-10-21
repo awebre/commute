@@ -1,11 +1,11 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "commutr.Android", "commute.Android\commutr.Android.csproj", "{7612DFE3-88E9-4247-BF69-605C9ACD3908}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "commutr.Android", "commutr.Android\commutr.Android.csproj", "{7612DFE3-88E9-4247-BF69-605C9ACD3908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "commutr.iOS", "commute.iOS\commutr.iOS.csproj", "{7ACAFC95-7914-4567-B3B1-79B19038D63C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "commutr.iOS", "commutr.iOS\commutr.iOS.csproj", "{7ACAFC95-7914-4567-B3B1-79B19038D63C}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "commutr", "commute\commutr.shproj", "{DD4C447E-9E37-43DB-B811-4A8A068682FE}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "commutr", "commutr\commutr.shproj", "{DD4C447E-9E37-43DB-B811-4A8A068682FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
