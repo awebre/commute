@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using commutr.Services;
@@ -45,8 +46,10 @@ namespace commutr.ViewModels
                 IsBusy = true;
                 FillUps.Clear();
             
-                var fillUps = await dataStore.GetItemsAsync();
+                var fillUps = (await dataStore.GetItemsAsync()).ToList();
                 fillUps.ForEach(x => FillUps.Add(x));
+                fillUps = fillUps.OrderByDescending(x => x.Date).ToList();
+                FillUps = new ObservableCollection<FillUp>(fillUps);
                 IsBusy = false;
             }
         }
