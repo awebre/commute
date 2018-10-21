@@ -14,11 +14,22 @@ namespace commutr.Views
         
         public List<int> Years => GetYears();
 
-        public NewVehiclePage()
+        public NewVehiclePage(Vehicle vehicle = null)
         {
             InitializeComponent();
 
-            Item = new Vehicle();
+            if (vehicle == null)
+            {
+                Title = "New Vehicle";
+                vehicle = new Vehicle();
+            }
+            else
+            {
+                Title = "Edit Vehicle";
+            }
+
+            Item = vehicle;
+           
 
             BindingContext = this;
         }

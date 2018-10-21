@@ -14,6 +14,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MyVehiclePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -27,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddFillUpViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FillUpViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MyVehicleViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\VehicleDetailsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\VehicleViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\VehiclePage.xaml.cs">
@@ -48,6 +53,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Vehicle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AddFillUpPage.xaml.cs">
       <DependentUpon>AddFillUpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MyVehiclePage.xaml.cs">
+      <DependentUpon>MyVehiclePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

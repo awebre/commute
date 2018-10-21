@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using commutr.Services;
@@ -18,7 +19,8 @@ namespace commutr.ViewModels
         {
             this.dataStore = dataStore;
             FillUps = new ObservableCollection<FillUp>();
-            AddFillUpCommand = new Command(ExecuteAddFillUpCommand);
+            AddFillUpCommand = new Command(async () => await ExecuteAddFillUpCommand());
+            DeleteFillUpCommand = new Command<FillUp>(async (fillUp) => await ExecuteDeleteFillUpCommand(fillUp));
             LoadFillUpsCommand = new Command(async () => await ExecuteLoadFillUpsCommand());
         }
         
@@ -32,11 +34,22 @@ namespace commutr.ViewModels
 
         public ICommand AddFillUpCommand { get; }
         
+        public ICommand DeleteFillUpCommand { get; }
+        
         public ICommand LoadFillUpsCommand { get; }
 
-        private void ExecuteAddFillUpCommand()
+        private async Task ExecuteAddFillUpCommand()
         {
-            Application.Current.MainPage.Navigation.PushAsync(new AddFillUpPage());
+            await Application.Current.MainPage.Navigation.PushAsync(new AddFillUpPage());
+        }
+
+        private async Task ExecuteDeleteFillUpCommand(FillUp fillUp)
+        {
+            var result = await dataStore.DeleteItemAsync(fillUp.Id);
+            if (result == 1)
+            {
+                FillUps.Remove(fillUp);
+            }
         }
 
         private async Task ExecuteLoadFillUpsCommand()
