@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using commutr.Models;
 using commutr.Services;
+using PropertyChanged;
 using Xamarin.Forms;
 
 namespace commutr.ViewModels
@@ -23,7 +25,7 @@ namespace commutr.ViewModels
             fillUp.Date = DateTime.Today;
         }
 
-        public string Title => "Add Fill Up";
+        public string Title => "Fill Up";
 
         public FillUp FillUp
         {
@@ -31,7 +33,6 @@ namespace commutr.ViewModels
             set
             {
                 fillUp = value;
-                OnPropertyChanged();
             }
             
         }
@@ -48,6 +49,8 @@ namespace commutr.ViewModels
             {
                 dataStore.UpdateItemAsync(fillUp);
             }
+
+            Application.Current.MainPage.Navigation.PopAsync();
         }
     }
 }

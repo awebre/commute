@@ -26,7 +26,6 @@ namespace commutr.Views
         async void Save_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "AddVehicle", Item);
-            await Navigation.PopModalAsync();
         }
 
         private static List<int> GetYears()

@@ -1,8 +1,13 @@
+using System.Collections.Generic;
+
 namespace commutr.Models
 {
-    public enum DistanceUnits
+    public static class DistanceUnits
     {
-        Miles,
-        Kilometers
+        public static List<string> All => new List<string> {Miles, Kilometer};
+
+        public static string Miles => nameof(Miles);
+
+        public static string Kilometer => nameof(Kilometer);
     }
 }

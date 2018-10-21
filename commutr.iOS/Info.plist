@@ -23,9 +23,9 @@
     <key>MinimumOSVersion</key>
     <string>8.0</string>
     <key>CFBundleDisplayName</key>
-    <string>commute</string>
+    <string>commutr</string>
     <key>CFBundleIdentifier</key>
-    <string>com.thewebre.commute</string>
+    <string>com.thewebre.commutr</string>
     <key>CFBundleVersion</key>
     <string>1.0</string>
     <key>UILaunchStoryboardName</key>

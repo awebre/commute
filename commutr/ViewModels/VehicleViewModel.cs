@@ -13,9 +13,6 @@ namespace commutr.ViewModels
 {
     public class VehicleViewModel : BaseViewModel
     {
-        public ObservableCollection<Vehicle> Items { get; set; }
-        public Command LoadItemsCommand { get; set; }
-
         private readonly IDataStore<Vehicle> dataStore;
         private Vehicle selectedVehicle;
 
@@ -25,18 +22,21 @@ namespace commutr.ViewModels
 
             Title = "Vehicles";
             Items = new ObservableCollection<Vehicle>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
+            
             MessagingCenter.Subscribe<NewVehiclePage, Vehicle>(this, "AddVehicle", async (obj, item) =>
             {
-                var newItem = item;
-                Items.Add(newItem);
-                await dataStore.AddItemAsync(newItem);
+                await dataStore.AddItemAsync(item);
+                await Application.Current.MainPage.Navigation.PopAsync();
             });
 
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             DeleteVehicleCommand = new Command<Vehicle>(DeleteVehicle);
             MakePrimaryCommand = new Command<Vehicle>(MakePrimary);
         }
+        
+        public ObservableCollection<Vehicle> Items { get; set; }
+        
+        public ICommand LoadItemsCommand { get; }
 
         public ICommand DeleteVehicleCommand { get; }
 
@@ -112,10 +112,8 @@ namespace commutr.ViewModels
         public void OnAppearing()
         {
             SelectedVehicle = null;
-            if (Items.Count == 0)
-            {
-                LoadItemsCommand.Execute(null);
-            }
+            LoadItemsCommand.Execute(null);
+
         }
     }
 }

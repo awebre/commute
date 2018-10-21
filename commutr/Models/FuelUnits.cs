@@ -1,8 +1,13 @@
+using System.Collections.Generic;
+
 namespace commutr.Models
 {
-    enum FuelUnits
+    public static class FuelUnits
     {
-        Gallons,
-        Litres
+        public static List<string> All => new List<string> {Gallons, Litre};
+
+        public static string Gallons => nameof(Gallons);
+
+        public static string Litre => nameof(Litre);
     }
 }

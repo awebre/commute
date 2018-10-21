@@ -6,29 +6,32 @@
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"></ColumnDefinition>
-                    <ColumnDefinition Width="7*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Label Text="Make" FontSize="Medium" />
-                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Item.Make}" FontSize="Small" />
-                <Label Grid.Row="1" Grid.Column="0" Text="Model" FontSize="Medium" />
-                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Item.Model}" FontSize="Small" />
-                <Label Grid.Row="2" Grid.Column="0" Text="Year" FontSize="Medium" />
-                <Picker Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Item.Year}" ItemsSource="{Binding Years}" />
-                <Label Grid.Row="3" Grid.Column="0" Text="Odometer" FontSize="Medium" />
-                <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Item.Odometer}" Keyboard="Numeric" />
-            </Grid>
-            <Label Text="Notes" FontSize="Medium" />
-            <Editor Text="{Binding Item.Notes}" BackgroundColor="LightGray" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Make" FontSize="Medium" />
+                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Item.Make}" FontSize="Small" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="Model" FontSize="Medium" />
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Item.Model}" FontSize="Small" />
+                    <Label Grid.Row="2" Grid.Column="0" Text="Year" FontSize="Medium" />
+                    <Picker Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Item.Year}"
+                            ItemsSource="{Binding Years}" />
+                    <Label Grid.Row="3" Grid.Column="0" Text="Odometer" FontSize="Medium" />
+                    <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Item.Odometer}" Keyboard="Numeric" />
+                </Grid>
+                <Label Text="Notes" FontSize="Medium" />
+                <Editor Text="{Binding Item.Notes}" BackgroundColor="LightGray" HeightRequest="200" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -16,5 +16,11 @@ namespace commutr.Views
 
             BindingContext = viewModel;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewModel.OnAppearing();
+        }
     }
 }

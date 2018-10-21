@@ -4,6 +4,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="commutr.Views.AddFillUpPage"
              Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding SaveFillUpCommand}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="20" Padding="15">
@@ -17,24 +20,23 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*" />
-                        <ColumnDefinition Width="7*" />
+                        <ColumnDefinition Width="4*" />
                     </Grid.ColumnDefinitions>
                     <Label Text="Date" FontSize="Medium" />
-                    <DatePicker Grid.Row="0" Grid.Column="1" Date="{Binding FillUp.Date}" FontSize="Small" />
-                    <Label Grid.Row="1" Grid.Column="0" Text="Trip Miles" FontSize="Medium" />
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding FillUp.TripMiles}" FontSize="Small"
-                           Keyboard="Numeric" />
+                    <DatePicker Grid.Row="0" Grid.Column="1" Date="{Binding FillUp.Date}" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="Miles" FontSize="Medium" />
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding FillUp.Distance}" Keyboard="Numeric" />
                     <Label Grid.Row="2" Grid.Column="0" Text="Gallons" FontSize="Medium" />
-                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding FillUp.Gallons}" Keyboard="Numeric" />
-                    <Label Grid.Row="3" Grid.Column="0" Text="$/gal" FontSize="Medium" />
-                    <Entry Grid.Row="3" Grid.Column="1" Text="{Binding FillUp.PricePerGallon}" Keyboard="Numeric" />
+                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding FillUp.FuelAmount}" Keyboard="Numeric" />
+                    <Label Grid.Row="3" Grid.Column="0" Text="$/Gallon" FontSize="Medium" />
+                    <Entry Grid.Row="3" Grid.Column="1" Text="{Binding FillUp.PricePerFuelAmount}" Keyboard="Numeric" />
                     <Label Grid.Row="4" Grid.Column="0" Text="Total $" />
                     <Entry Grid.Row="4" Grid.Column="1" Text="{Binding FillUp.Total, Mode=OneWay}" IsEnabled="False" />
                 </Grid>
+                <Label Text="Fuel Economy" FontSize="Medium" />
+                <Label Text="{Binding FillUp.MPG, Mode=OneWay}" />
                 <Label Text="Notes" FontSize="Medium" />
                 <Editor Text="{Binding FillUp.Notes}" BackgroundColor="LightGray" HeightRequest="200" />
-                <Label Text="Fuel Economy" FontSize="Medium" />
-                <Entry Text="{Binding FillUp.FuelEconomy, Mode=OneWay}" IsEnabled="False" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
