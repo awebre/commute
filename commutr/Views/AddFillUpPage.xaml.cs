@@ -8,7 +8,7 @@ namespace commutr.Views
 {
     public partial class AddFillUpPage : ContentPage
     {
-        public AddFillUpPage(FillUp fillUp = null)
+        public AddFillUpPage(int vehicleId, FillUp fillUp = null)
         {
             InitializeComponent();
 
@@ -17,6 +17,14 @@ namespace commutr.Views
             if (fillUp != null)
             {
                 vm.FillUp = fillUp;
+            }
+            else
+            {
+                vm.FillUp = new FillUp
+                {
+                    VehicleId = vehicleId,
+                    Date = DateTime.Now
+                };
             }
         }
     }

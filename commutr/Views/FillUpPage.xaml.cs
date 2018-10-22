@@ -8,13 +8,19 @@ namespace commutr.Views
     public partial class FillUpPage : ContentPage
     {
         private readonly FillUpViewModel viewModel;
-        public FillUpPage()
+        public FillUpPage(int vehicleId)
         {
             viewModel = App.Resolver.Resolve<FillUpViewModel>();
+            viewModel.SelectedVehicleId = vehicleId;
             
             InitializeComponent();
 
             BindingContext = viewModel;
+        }
+
+        public FillUpPage()
+        {
+            InitializeComponent();
         }
 
         protected override void OnAppearing()

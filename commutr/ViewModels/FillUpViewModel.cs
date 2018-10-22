@@ -26,7 +26,9 @@ namespace commutr.ViewModels
         
         public Vehicle CurrentVehicle { get; set; }
 
-        public string Title => "Fill Ups";
+        public new string Title => "Fill Ups";
+        
+        public int SelectedVehicleId { get; set; }
 
         public ObservableCollection<FillUp> FillUps { get; set; }
         
@@ -40,7 +42,7 @@ namespace commutr.ViewModels
 
         private async Task ExecuteAddFillUpCommand()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new AddFillUpPage());
+            await Application.Current.MainPage.Navigation.PushAsync(new AddFillUpPage(SelectedVehicleId));
         }
 
         private async Task ExecuteDeleteFillUpCommand(FillUp fillUp)
@@ -59,7 +61,7 @@ namespace commutr.ViewModels
                 IsBusy = true;
                 FillUps.Clear();
             
-                var fillUps = (await dataStore.GetItemsAsync()).ToList();
+                var fillUps = (await dataStore.GetItemsAsync()).Where(x => x.VehicleId == SelectedVehicleId).ToList();
                 fillUps.ForEach(x => FillUps.Add(x));
                 fillUps = fillUps.OrderByDescending(x => x.Date).ToList();
                 FillUps = new ObservableCollection<FillUp>(fillUps);

@@ -16,17 +16,15 @@ namespace commutr.Views
             InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
+            Children.Add(new FillUpPage(viewModel.Item.Id));
+            Children.Add(new MyVehiclePage(viewModel.Item.Id));
         }
 
         public VehicleDetailsPage()
         {
             InitializeComponent();
 
-            var item = new Vehicle
-            {
-                Make = "Item 1",
-                Model = "This is an item description."
-            };
+            var item = new Vehicle();
 
             viewModel = new VehicleDetailsViewModel(item);
             BindingContext = viewModel;
