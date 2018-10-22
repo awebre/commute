@@ -159,6 +159,17 @@
   <ItemGroup>
     <Folder Include="Configuration\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\car.png" />
+    <Content Include="Resources\car@2x.png" />
+    <Content Include="Resources\car@3x.png" />
+    <Content Include="Resources\chart.png" />
+    <Content Include="Resources\chart@2x.png" />
+    <Content Include="Resources\chart@3x.png" />
+    <Content Include="Resources\fillup.png" />
+    <Content Include="Resources\fillup@2x.png" />
+    <Content Include="Resources\fillup@3x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\commutr\commutr.projitems" Label="Shared" Condition="Exists('..\commutr\commutr.projitems')" />
 </Project>

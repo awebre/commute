@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:commutr.Converters;assembly=commute.iOS"
+             xmlns:converters="clr-namespace:commutr.Converters"
              x:Class="commutr.Views.FillUpPage"
              x:Name="FillUps"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             Icon="fillup.png">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:DateToStringConverter x:Key="DateToStringConverter" Format="MMM dd, yyyy" />

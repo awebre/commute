@@ -15,6 +15,8 @@ namespace commutr.ViewModels
     public class FillUpViewModel : BaseViewModel
     {
         private readonly IDataStore<FillUp> dataStore;
+        private FillUp fillUp;
+
         public FillUpViewModel(IDataStore<FillUp> dataStore)
         {
             this.dataStore = dataStore;
@@ -31,8 +33,19 @@ namespace commutr.ViewModels
         public int SelectedVehicleId { get; set; }
 
         public ObservableCollection<FillUp> FillUps { get; set; }
-        
-        public FillUp FillUp { get; set; }
+
+        public FillUp FillUp
+        {
+            get => fillUp;
+            set
+            {
+                fillUp = value;
+                if (fillUp != null)
+                {
+                    Application.Current.MainPage.Navigation.PushAsync(new AddFillUpPage(SelectedVehicleId, fillUp));
+                }
+            }
+        }
 
         public ICommand AddFillUpCommand { get; }
         

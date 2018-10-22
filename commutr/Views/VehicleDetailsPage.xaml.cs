@@ -18,6 +18,7 @@ namespace commutr.Views
             BindingContext = this.viewModel = viewModel;
             Children.Add(new FillUpPage(viewModel.Item.Id));
             Children.Add(new MyVehiclePage(viewModel.Item.Id));
+            Children.Add(new ReportPage());
         }
 
         public VehicleDetailsPage()
