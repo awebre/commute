@@ -8,8 +8,11 @@ namespace commutr.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        #pragma warning disable 67
         public event PropertyChangedEventHandler PropertyChanged;
-        
+        #pragma warning restore 67
+
+
         bool isBusy = false;
         public bool IsBusy
         {

@@ -27,12 +27,11 @@ namespace commutr.Views
             var fuelChartEntries = viewModel.GetFuelChartEntries();
             var fuelChart = new LineChart()
             {
+                
                 LabelTextSize = 35.0f,
-                ValueLabelOrientation = Orientation.Horizontal,
-                LabelOrientation = Orientation.Horizontal,
                 Entries = fuelChartEntries
             };
-            
+
             FuelChart.Chart = fuelChart;
 
 
@@ -40,12 +39,19 @@ namespace commutr.Views
             var pricePerChart = new PointChart()
             {
                 LabelTextSize = 35.0f,
-                ValueLabelOrientation = Orientation.Horizontal,
-                LabelOrientation = Orientation.Horizontal,
                 Entries = pricePerEntries
             };
 
             PricePerGallonChart.Chart = pricePerChart;
+
+            var totalEntries = viewModel.GetTotalCostEntries();
+            var totalChart = new DonutChart()
+            {
+                LabelTextSize = 35.0f,
+                Entries = totalEntries
+            };
+
+            TotalChart.Chart = totalChart;
         }
     }
 }

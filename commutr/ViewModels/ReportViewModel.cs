@@ -19,9 +19,9 @@ namespace commutr.ViewModels
         {
             this.dataStore = dataStore;
         }
-        
+
         public int SelectedVehicleId { get; set; }
-        
+
         private Dictionary<int, string> MonthColorLookup => new Dictionary<int, string>
         {
             { 1, "#c4006b"},
@@ -37,7 +37,7 @@ namespace commutr.ViewModels
             { 11, "#8c2801" },
             { 12, "#848484" }
         };
-        
+
         public List<Entry> GetFuelChartEntries()
         {
             var grouped = GetFillUpsByMonth();
@@ -45,7 +45,7 @@ namespace commutr.ViewModels
             foreach (var group in grouped)
             {
                 var monthlyAverage = Math.Round(group.Sum(x => x.FuelEconomy) / group.Count(), 2);
-                entries.Add(new Entry((float) monthlyAverage)
+                entries.Add(new Entry((float)monthlyAverage)
                 {
                     Label = DateTimeFormatInfo.CurrentInfo?.GetMonthName(group.Key),
                     ValueLabel = $"{monthlyAverage} MPG",
@@ -59,12 +59,12 @@ namespace commutr.ViewModels
         public List<Entry> GetPricePerEntries()
         {
             var grouped = GetFillUpsByMonth();
-            
+
             var entries = new List<Entry>();
             foreach (var group in grouped)
             {
                 var monthlyAverage = Math.Round(group.Sum(x => x.PricePerFuelAmount) / group.Count(), 3);
-                entries.Add(new Entry((float) monthlyAverage)
+                entries.Add(new Entry((float)monthlyAverage)
                 {
                     Label = DateTimeFormatInfo.CurrentInfo?.GetMonthName(group.Key),
                     ValueLabel = $"${monthlyAverage}",
@@ -74,12 +74,31 @@ namespace commutr.ViewModels
 
             return entries;
         }
-        
+
+        public List<Entry> GetTotalCostEntries()
+        {
+            var grouped = GetFillUpsByMonth();
+            
+            var entries = new List<Entry>();
+            foreach (var group in grouped)
+            {
+                var monthlyAverage = Math.Round(group.Sum(x => x.Total) / group.Count(), 2);
+                entries.Add(new Entry((float)monthlyAverage)
+                {
+                    Label = DateTimeFormatInfo.CurrentInfo?.GetMonthName(group.Key),
+                    ValueLabel = $"${monthlyAverage}",
+                    Color = SKColor.Parse(MonthColorLookup[group.Key])
+                });
+            }
+
+            return entries;
+        }
+
         private IEnumerable<IGrouping<int, FillUp>> GetFillUpsByMonth()
         {
             var fillups = dataStore.GetItemsAsync().Result;
 
-            var startDate = new DateTime(DateTime.Now.Year - 1, DateTime.Now.Month - 1, 1);
+            var startDate = new DateTime(DateTime.Now.Year - 1, DateTime.Now.Month + 1, 1);
             fillups = fillups.Where(x => x.VehicleId == SelectedVehicleId && x.Date >= startDate).OrderBy(x => x.Date).ToList();
 
             var grouped = fillups.GroupBy(x => x.Date.Month);
