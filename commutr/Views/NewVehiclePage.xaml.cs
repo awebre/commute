@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using commutr.Models;
+using commutr.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,15 +10,12 @@ namespace commutr.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewVehiclePage : ContentPage
-    {
-        public Vehicle Item { get; set; }
-        
-        public List<int> Years => GetYears();
-
+    {        
+        private readonly VehicleCrudViewModel viewModel;
         public NewVehiclePage(Vehicle vehicle = null)
         {
+            viewModel = App.Resolver.Resolve<VehicleCrudViewModel>();
             InitializeComponent();
-
             if (vehicle == null)
             {
                 Title = "New Vehicle";
@@ -28,29 +26,21 @@ namespace commutr.Views
                 Title = "Edit Vehicle";
             }
 
-            Item = vehicle;
-           
+            viewModel.Item = vehicle;
 
-            BindingContext = this;
+            BindingContext = viewModel;
         }
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddVehicle", Item);
-        }
-
-        private static List<int> GetYears()
-        {
-            var years = new List<int>();
-            var nextYear = DateTime.Now.Year + 1;
-            var year = 1900;
-            while (year <= nextYear)
+            if (viewModel.Item.Id == 0)
             {
-                years.Add(year);
-                year++;
+                MessagingCenter.Send(this, "AddVehicle", viewModel.Item);
             }
-
-            return years.OrderByDescending(x => x).ToList();
+            else
+            {
+                await viewModel.Save();
+            }
         }
     }
 }

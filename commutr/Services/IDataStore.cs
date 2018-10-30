@@ -10,6 +10,6 @@ namespace commutr.Services
         Task<int> UpdateItemAsync(T item);
         Task<int> DeleteItemAsync(int id);
         Task<T> GetItemAsync(int id);
-        Task<IEnumerable<T>> GetItemsAsync();
+        Task<List<T>> GetItemsAsync();
     }
 }

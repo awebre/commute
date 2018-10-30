@@ -2,6 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="commutr.Views.MyVehiclePage"
              Title="{Binding Title}"
              Icon="car.png">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit" Order="Secondary" Command="{Binding EditVehicleCommand}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Make" FontSize="Medium" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Vehicle.Make}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Text="Model" FontSize="Medium" />
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Vehicle.Model}" />
+                    <Label Grid.Row="2" Grid.Column="0" Text="Year" />
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding Vehicle.Year}" />
+                    <Label Grid.Row="3" Grid.Column="0" Text="Odometer" FontSize="Medium" />
+                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding Vehicle.Odometer}" />
+                </Grid>
+                <Label Text="Notes" FontSize="Medium" />
+                <Label Text="{Binding Vehicle.Notes}" HeightRequest="200" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

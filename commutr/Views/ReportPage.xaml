@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="commutr.Views.ReportPage"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="commutr.Views.ReportPage"
              Title="{Binding Title}"
              Icon="chart.png">
     <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="10">
+                <Label Text="Average Fuel Economy" HorizontalOptions="CenterAndExpand" />
+                <forms:ChartView x:Name="FuelChart" HeightRequest="150"></forms:ChartView>
+                <Label Text="Average Price Per Gallon" HorizontalOptions="CenterAndExpand" />
+                <forms:ChartView x:Name="PricePerGallonChart" HeightRequest="150"></forms:ChartView>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

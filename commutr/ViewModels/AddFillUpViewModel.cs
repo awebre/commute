@@ -23,9 +23,9 @@ namespace commutr.ViewModels
                 fillUp = new FillUp();
             }
             fillUp.Date = DateTime.Today;
+            Title = "Fill Up";
         }
 
-        public string Title => "Fill Up";
 
         public FillUp FillUp
         {
@@ -34,7 +34,7 @@ namespace commutr.ViewModels
             {
                 fillUp = value;
             }
-            
+
         }
 
         public ICommand SaveFillUpCommand { get; }

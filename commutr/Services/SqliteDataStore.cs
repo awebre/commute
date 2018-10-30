@@ -30,11 +30,11 @@ namespace commutr.Services
             return await connection.Table<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<T>> GetItemsAsync()
+        public Task<List<T>> GetItemsAsync()
         {
             var table = typeof(T).Name;
-            var result = await connection.QueryAsync<T>(@"SELECT * FROM " + table);
-            return result;
+            var result = connection.Table<T>();
+            return result.ToListAsync();
         }
 
         public async Task<int> UpdateItemAsync(T item)
