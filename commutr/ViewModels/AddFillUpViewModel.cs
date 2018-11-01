@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using commutr.Models;
 using commutr.Services;
@@ -10,12 +11,14 @@ namespace commutr.ViewModels
 {
     public class AddFillUpViewModel : BaseViewModel
     {
-        private readonly IDataStore<FillUp> dataStore;
+        private readonly IDataStore<FillUp> fillUpsDataStore;
+        private readonly IDataStore<Vehicle> vehicleDataStore;
         private FillUp fillUp;
 
-        public AddFillUpViewModel(IDataStore<FillUp> dataStore)
+        public AddFillUpViewModel(IDataStore<FillUp> fillUpsDataStore, IDataStore<Vehicle> vehicleDataStore)
         {
-            this.dataStore = dataStore;
+            this.fillUpsDataStore = fillUpsDataStore;
+            this.vehicleDataStore = vehicleDataStore;
 
             SaveFillUpCommand = new Command(ExecuteSaveFillUpCommand);
             if (fillUp == null)
@@ -43,11 +46,18 @@ namespace commutr.ViewModels
         {
             if (fillUp.Id == 0)
             {
-                dataStore.AddItemAsync(fillUp);
+                var vehicle = vehicleDataStore.GetItemsAsync().Result.FirstOrDefault(x => x.Id == fillUp.VehicleId);
+                if (vehicle != null)
+                {
+                    vehicle.Odometer += fillUp.Distance;
+                    vehicleDataStore.UpdateItemAsync(vehicle);
+                }
+                
+                fillUpsDataStore.AddItemAsync(fillUp);
             }
             else
-            {
-                dataStore.UpdateItemAsync(fillUp);
+            {         
+                fillUpsDataStore.UpdateItemAsync(fillUp);
             }
 
             Application.Current.MainPage.Navigation.PopAsync();

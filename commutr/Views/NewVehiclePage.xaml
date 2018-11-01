@@ -19,12 +19,12 @@
                         <ColumnDefinition Width="3*" />
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="Make" FontSize="Medium" />
-                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Item.Make}" FontSize="Small" />
-                    <Label Grid.Row="1" Grid.Column="0" Text="Model" FontSize="Medium" />
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Item.Model}" FontSize="Small" />
+                    <Label Text="Make" />
+                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Item.Make}" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="Model"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Item.Model}"/>
                     <Label Grid.Row="2" Grid.Column="0" Text="Year" FontSize="Medium" />
-                    <Picker Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Item.Year, Mode=TwoWay}"
+                    <Picker Grid.Row="2" Grid.Column="1" x:Name="YearPicker" SelectedItem="{Binding Item.Year, Mode=TwoWay}"
                             ItemsSource="{Binding Years}" />
                     <Label Grid.Row="3" Grid.Column="0" Text="Odometer" FontSize="Medium" />
                     <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Item.Odometer}" Keyboard="Numeric" />

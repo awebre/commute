@@ -24,11 +24,10 @@ namespace commutr.Views
             else
             {
                 Title = "Edit Vehicle";
-            }
-
-            viewModel.Item = vehicle;
-
+            }            
             BindingContext = viewModel;
+            
+            viewModel.Item = vehicle;
         }
 
         async void Save_Clicked(object sender, EventArgs e)

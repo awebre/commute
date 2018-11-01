@@ -26,6 +26,7 @@ namespace commutr.ViewModels
         public async Task GetVehicle()
         {
             Vehicle = await dataStore.GetItemAsync(VehicleId);
+            
         }
 
         private async void EditVehicle()

@@ -44,6 +44,7 @@ namespace commutr.ViewModels
             var entries = new List<Entry>();
             foreach (var group in grouped)
             {
+                //TODO: get entries for each month starting from the CURRENT month, not the first month we have data for
                 var monthlyAverage = Math.Round(group.Sum(x => x.FuelEconomy) / group.Count(), 2);
                 entries.Add(new Entry((float)monthlyAverage)
                 {

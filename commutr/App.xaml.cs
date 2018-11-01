@@ -1,4 +1,7 @@
-﻿using commutr.Services;
+﻿using System.Linq;
+using commutr.Models;
+using commutr.Services;
+using commutr.ViewModels;
 using commutr.Views;
 using SimpleInjector;
 using Xamarin.Forms;
@@ -22,7 +25,17 @@ namespace commutr
 
             Resolver = container.GetInstance<DependencyResolver>();
 
-            MainPage = new NavigationPage(new VehiclePage());
+            var primaryVehicle = Resolver.Resolve<IDataStore<Vehicle>>().GetItemsAsync().Result
+                .FirstOrDefault(x => x.IsPrimary);
+
+            if (primaryVehicle != null)
+            {
+                MainPage = new NavigationPage(new VehicleDetailsPage(new VehicleDetailsViewModel(primaryVehicle)));
+            }
+            else
+            {
+                MainPage = new NavigationPage(new VehiclePage());
+            }
         }
 
         protected override void OnStart()
