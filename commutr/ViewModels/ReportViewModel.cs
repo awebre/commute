@@ -95,6 +95,25 @@ namespace commutr.ViewModels
             return entries;
         }
 
+        public List<Entry> GetTotalMilesEntries()
+        {
+            var grouped = GetFillUpsByMonth();
+            
+            var entries = new List<Entry>();
+            foreach (var group in grouped)
+            {
+                var monthlyMiles = group.Sum(x => x.Distance);
+                entries.Add(new Entry((float)monthlyMiles)
+                {
+                    Label = DateTimeFormatInfo.CurrentInfo?.GetMonthName(group.Key),
+                    ValueLabel = $"{monthlyMiles}",
+                    Color = SKColor.Parse(MonthColorLookup[group.Key])
+                });
+            }
+
+            return entries;
+        }
+
         private IEnumerable<IGrouping<int, FillUp>> GetFillUpsByMonth()
         {
             var fillups = dataStore.GetItemsAsync().Result;

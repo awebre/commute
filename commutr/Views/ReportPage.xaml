@@ -11,6 +11,8 @@
                 <forms:ChartView x:Name="FuelChart" HeightRequest="250"></forms:ChartView>
                 <Label Text="Average Price Per Gallon" HorizontalOptions="CenterAndExpand" />
                 <forms:ChartView x:Name="PricePerGallonChart" HeightRequest="250"></forms:ChartView>
+                <Label Text="Monthly Miles" HorizontalOptions="CenterAndExpand"></Label>
+                <forms:ChartView x:Name="MonthlyMilesChart" HeightRequest="250"></forms:ChartView>
                 <Label Text="Average Total Fill Up Cost" HorizontalOptions="CenterAndExpand"></Label>
                 <forms:ChartView x:Name="TotalChart" HeightRequest="250"></forms:ChartView>
             </StackLayout>

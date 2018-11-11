@@ -44,6 +44,15 @@ namespace commutr.Views
 
             PricePerGallonChart.Chart = pricePerChart;
 
+            var milesEntries = viewModel.GetTotalMilesEntries();
+            var milesChart = new BarChart()
+            {
+                LabelTextSize = 35.0f,
+                Entries = milesEntries
+            };
+
+            MonthlyMilesChart.Chart = milesChart;
+
             var totalEntries = viewModel.GetTotalCostEntries();
             var totalChart = new DonutChart()
             {
