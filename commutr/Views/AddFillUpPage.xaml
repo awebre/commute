@@ -33,6 +33,8 @@
                     <Label Grid.Row="4" Grid.Column="0" Text="Total $" />
                     <Entry Grid.Row="4" Grid.Column="1" Text="{Binding FillUp.Total, Mode=OneWay}" IsEnabled="False" />
                 </Grid>
+                <Label Text="Location" FontSize="Medium"></Label>
+                <Picker ItemsSource="{Binding Places}"></Picker>
                 <Label Text="Fuel Economy" FontSize="Medium" />
                 <Label Text="{Binding FillUp.MPG, Mode=OneWay}" />
                 <Label Text="Notes" FontSize="Medium" />

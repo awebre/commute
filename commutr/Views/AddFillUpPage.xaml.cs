@@ -27,5 +27,12 @@ namespace commutr.Views
                 };
             }
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await ((AddFillUpViewModel) BindingContext).GetNearbyPlaces();
+        }
     }
 }

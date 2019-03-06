@@ -20,6 +20,7 @@ namespace commutr
             container.Register<DependencyResolver>();
             
             container.Register(typeof(IDataStore<>), typeof(SqliteDataStore<>));
+            container.Register<IGeolocationService, GeolocationService>();
             
             container.Verify();
 

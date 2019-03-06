@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -29,10 +29,16 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ColorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateToStringConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GoogleApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DistanceUnits.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FillUp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FuelUnits.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\GeolocationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\GooglePlacesService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IDataStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IGeolocationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IPlacesService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\RestService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddFillUpViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FillUpViewModel.cs" />

@@ -1,4 +1,5 @@
-﻿using SimpleInjector;
+﻿using commutr.Services;
+using SimpleInjector;
 
 namespace commutr.iOS.Configuration
 {
@@ -8,6 +9,7 @@ namespace commutr.iOS.Configuration
         {
             var container = new Container();
             //register ios specific implementations here
+            container.Register<IPlacesService>(() => new GooglePlacesService(GoogleApiHelper.iOSApiKey));
             return container;
         }
     }

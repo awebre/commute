@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using commutr.Models;
 using commutr.Services;
@@ -13,12 +14,18 @@ namespace commutr.ViewModels
     {
         private readonly IDataStore<FillUp> fillUpsDataStore;
         private readonly IDataStore<Vehicle> vehicleDataStore;
+        private readonly IPlacesService placesService;
         private FillUp fillUp;
+        private List<Place> places;
 
-        public AddFillUpViewModel(IDataStore<FillUp> fillUpsDataStore, IDataStore<Vehicle> vehicleDataStore)
+        public AddFillUpViewModel(
+            IDataStore<FillUp> fillUpsDataStore, 
+            IDataStore<Vehicle> vehicleDataStore, 
+            IPlacesService placesService)
         {
             this.fillUpsDataStore = fillUpsDataStore;
             this.vehicleDataStore = vehicleDataStore;
+            this.placesService = placesService;
 
             SaveFillUpCommand = new Command(ExecuteSaveFillUpCommand);
             if (fillUp == null)
@@ -33,11 +40,18 @@ namespace commutr.ViewModels
         public FillUp FillUp
         {
             get => fillUp;
-            set
-            {
-                fillUp = value;
-            }
+            set => fillUp = value;
+        }
 
+        public List<Place> Places
+        {
+            get => places;
+            set => places = value;
+        }
+
+        public async Task GetNearbyPlaces()
+        {
+            places = await placesService.GetNearByPlaces();
         }
 
         public ICommand SaveFillUpCommand { get; }
