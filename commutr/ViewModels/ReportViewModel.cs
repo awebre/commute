@@ -79,7 +79,7 @@ namespace commutr.ViewModels
         public List<Entry> GetTotalCostEntries()
         {
             var grouped = GetFillUpsByMonth();
-            
+
             var entries = new List<Entry>();
             foreach (var group in grouped)
             {
@@ -98,7 +98,7 @@ namespace commutr.ViewModels
         public List<Entry> GetTotalMilesEntries()
         {
             var grouped = GetFillUpsByMonth();
-            
+
             var entries = new List<Entry>();
             foreach (var group in grouped)
             {

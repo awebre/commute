@@ -21,6 +21,7 @@ namespace commutr.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             var container = SimpleInjectorConfiguration.Configure();
+            Xamarin.FormsMaps.Init();
             LoadApplication(new App(container));
 
             return base.FinishedLaunching(app, options);

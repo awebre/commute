@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="commutr.Views.LocationsMapPage"
+             Title="{Binding Title}"
+             Padding="0">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Find Me" Order="Secondary" Clicked="Handle_Clicked" />
+        </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     Spacing="0"
+                     Padding="0"
+                     Margin="0"
+                     BackgroundColor="Black">
+            <maps:Map x:Name="LocationMap" VerticalOptions="FillAndExpand"
+                      IsVisible="{Binding IsMapReady}"
+                      IsShowingUser="True"
+                      MapType="Hybrid" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -76,6 +76,9 @@
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.5.231</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Maps">
+      <Version>3.6.0.220655</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\SimpleInjectorConfiguration.cs" />

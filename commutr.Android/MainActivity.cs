@@ -17,6 +17,7 @@ namespace commutr.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             var container = SimpleInjectorConfiguration.Configure();
+            Xamarin.FormsMaps.Init(this, savedInstanceState); //TODO: create API Key for google maps
             LoadApplication(new App(container));
         }
     }

@@ -22,6 +22,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\LocationsMapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -40,6 +44,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AddFillUpViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FillUpViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LocationsMapViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MyVehicleViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ReportViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\VehicleCrudViewModel.cs" />
@@ -75,6 +80,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ColorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\GoogleApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\LocationDataStoreExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\LocationsMapPage.xaml.cs">
+      <DependentUpon>LocationsMapPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\VehiclePage.xaml">
