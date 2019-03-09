@@ -6,8 +6,8 @@ namespace commutr.Services
 {
     public interface IPlacesService
     {
-        Task<List<Location>> GetNearByPlaces();
+        Task<List<StationLocation>> GetNearByPlaces();
 
-        Task<Location> RefreshPlaceId(Location location);
+        Task<StationLocation> RefreshPlaceId(StationLocation location);
     }
 }

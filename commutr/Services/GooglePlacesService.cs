@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using commutr.Models;
 using GeoLocation = Xamarin.Essentials.Location;
-using Location = commutr.Models.Location;
+using StationLocation = commutr.Models.StationLocation;
 using Xamarin.Forms.Internals;
 using System.Net.Http;
 using System.Linq;
@@ -22,7 +22,7 @@ namespace commutr.Services
             restService = new RestService();
         }
 
-        public async Task<List<Location>> GetNearByPlaces()
+        public async Task<List<StationLocation>> GetNearByPlaces()
         {
             GeoLocation geolocation;
             try
@@ -42,8 +42,8 @@ namespace commutr.Services
 
             var result = await restService.GetAsync<GooglePlaceSearchResult>(url);
 
-            var places = new List<Location>();
-            result.candidates.ForEach(x => places.Add(new Location
+            var places = new List<StationLocation>();
+            result.candidates.ForEach(x => places.Add(new StationLocation
             {
                 PlaceId = x.place_id,
                 Address = x.formatted_address,
@@ -53,9 +53,9 @@ namespace commutr.Services
             return places;
         }
 
-        public async Task<List<Location>> RefreshPlaceIds(IEnumerable<Location> locations)
+        public async Task<List<StationLocation>> RefreshPlaceIds(IEnumerable<StationLocation> locations)
         {
-            List<Task<Location>> locationRefreshTask = new List<Task<Location>>();
+            List<Task<StationLocation>> locationRefreshTask = new List<Task<StationLocation>>();
             foreach (var location in locations)
             {
                 locationRefreshTask.Add(RefreshPlaceId(location));
@@ -65,7 +65,7 @@ namespace commutr.Services
             return locations.ToList();
         }
 
-        public async Task<Location> RefreshPlaceId(Location location)
+        public async Task<StationLocation> RefreshPlaceId(StationLocation location)
         {
             var result = await restService.GetAsync<GooglePlaceDetailResult>(PlaceDetailsUrl + location.PlaceId);
             location.PlaceId = result.result.place_id;

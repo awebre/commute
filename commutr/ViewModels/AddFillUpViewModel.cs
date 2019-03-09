@@ -14,16 +14,16 @@ namespace commutr.ViewModels
     {
         private readonly IDataStore<FillUp> fillUpsDataStore;
         private readonly IDataStore<Vehicle> vehicleDataStore;
-        private readonly IDataStore<Location> locationDataStore;
+        private readonly IDataStore<StationLocation> locationDataStore;
         private readonly IPlacesService placesService;
         private FillUp fillUp;
-        private List<Location> locations;
-        private Location location;
+        private List<StationLocation> locations;
+        private StationLocation location;
 
         public AddFillUpViewModel(
             IDataStore<FillUp> fillUpsDataStore,
             IDataStore<Vehicle> vehicleDataStore,
-            IDataStore<Location> locationDataStore,
+            IDataStore<StationLocation> locationDataStore,
             IPlacesService placesService)
         {
             this.fillUpsDataStore = fillUpsDataStore;
@@ -47,13 +47,13 @@ namespace commutr.ViewModels
             set => fillUp = value;
         }
 
-        public List<Location> Locations
+        public List<StationLocation> Locations
         {
             get => locations;
             set => locations = value;
         }
 
-        public Location Location
+        public StationLocation Location
         {
             get => location;
             set => location = value;
@@ -85,7 +85,7 @@ namespace commutr.ViewModels
                 var location = locationDataStore.GetItemsAsync().Result.FirstOrDefault(x => x.PlaceId == this.location.PlaceId);
                 if (location == null)
                 {
-                    fillUp.LocationId = await locationDataStore.AddItemAsync(new Location
+                    fillUp.LocationId = await locationDataStore.AddItemAsync(new StationLocation
                     {
                         PlaceId = this.location.PlaceId,
                         Name = this.location.Name,

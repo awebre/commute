@@ -5,9 +5,9 @@ using System.ComponentModel;
 
 namespace commutr.Models
 {
-    public class Location : IIdentifiable, INotifyPropertyChanged
+    public class StationLocation : IIdentifiable, INotifyPropertyChanged
     {
-        public Location()
+        public StationLocation()
         {
         }
 

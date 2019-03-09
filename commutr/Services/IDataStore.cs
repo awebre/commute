@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace commutr.Services
 {
@@ -11,5 +12,6 @@ namespace commutr.Services
         Task<int> DeleteItemAsync(int id);
         Task<T> GetItemAsync(int id);
         Task<List<T>> GetItemsAsync();
+        AsyncTableQuery<T> Query();
     }
 }

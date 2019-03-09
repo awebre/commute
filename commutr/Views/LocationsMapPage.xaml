@@ -16,7 +16,9 @@
             <maps:Map x:Name="LocationMap" VerticalOptions="FillAndExpand"
                       IsVisible="{Binding IsMapReady}"
                       IsShowingUser="True"
-                      MapType="Hybrid" />
+                      ItemsSource="{Binding Pins}"
+                      MapType="Hybrid">
+            </maps:Map>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

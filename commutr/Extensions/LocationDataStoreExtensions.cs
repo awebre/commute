@@ -7,7 +7,7 @@ namespace commutr.Extensions
 {
     public static class LocationDataStoreExtensions
     {
-        public static async Task RefreshLocations(this IDataStore<Location> locationStore)
+        public static async Task RefreshLocations(this IDataStore<StationLocation> locationStore)
         {
             var locations = await locationStore.GetItemsAsync();
             foreach (var location in locations)

@@ -24,6 +24,7 @@ namespace commutr
 
             container.Register(typeof(IDataStore<>), typeof(SqliteDataStore<>));
             container.Register<IGeolocationService, GeolocationService>();
+            container.Register<IGeocodingService, GeocodingService>();
 
             container.Verify();
 
@@ -45,7 +46,7 @@ namespace commutr
         protected override async void OnStart()
         {
             // Handle when your app starts
-            var locationDataStore = Resolver.Resolve<IDataStore<Location>>();
+            var locationDataStore = Resolver.Resolve<IDataStore<StationLocation>>();
             var placesService = Resolver.Resolve<IPlacesService>();
 
             await Task.Run(async () =>

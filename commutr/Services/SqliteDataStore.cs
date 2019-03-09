@@ -21,7 +21,7 @@ namespace commutr.Services
 
         public async Task<int> DeleteItemAsync(int id)
         {
-            var item = new T {Id = id};
+            var item = new T { Id = id };
             return await connection.DeleteAsync(item);
         }
 
@@ -32,14 +32,17 @@ namespace commutr.Services
 
         public Task<List<T>> GetItemsAsync()
         {
-            var table = typeof(T).Name;
-            var result = connection.Table<T>();
-            return result.ToListAsync();
+            return Query().ToListAsync();
         }
 
         public async Task<int> UpdateItemAsync(T item)
         {
             return await connection.UpdateAsync(item);
+        }
+
+        public AsyncTableQuery<T> Query()
+        {
+            return connection.Table<T>();
         }
     }
 }

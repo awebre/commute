@@ -76,13 +76,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\ReportPage.xaml.cs">
       <DependentUpon>ReportPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Location.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StationLocation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ColorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\GoogleApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\LocationDataStoreExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\LocationsMapPage.xaml.cs">
       <DependentUpon>LocationsMapPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IGeocodingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\GeocodingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\VehiclePage.xaml">

@@ -10,8 +10,10 @@ namespace commutr.Views
     public partial class LocationsMapPage : ContentPage
     {
         private readonly LocationsMapViewModel viewModel;
+        private readonly int vehicleId;
         public LocationsMapPage(int vehicleId)
         {
+            this.vehicleId = vehicleId;
             viewModel = App.Resolver.Resolve<LocationsMapViewModel>();
             viewModel.Title = "Locations";
             InitializeComponent();
@@ -19,12 +21,19 @@ namespace commutr.Views
             BindingContext = viewModel;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
             viewModel.IsMapReady = false;
             MoveToCurrentLocation();
+
+            LocationMap.Pins.Clear();
+            var pins = await viewModel.GetPins(vehicleId);
+            foreach (var pin in pins)
+            {
+                LocationMap.Pins.Add(pin);
+            }
             viewModel.IsMapReady = true;
 
         }
@@ -37,7 +46,7 @@ namespace commutr.Views
         private async void MoveToCurrentLocation()
         {
             var position = await viewModel.GetCurrentPosition();
-            LocationMap.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(25)));
+            LocationMap.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromMiles(1)));
         }
     }
 }
