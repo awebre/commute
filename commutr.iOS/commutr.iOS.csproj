@@ -106,6 +106,9 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Group76%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Group83%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Group-3.png" />
+    <BundleResource Include="Resources\pin.png" />
+    <BundleResource Include="Resources\pin%402x.png" />
+    <BundleResource Include="Resources\pin%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
