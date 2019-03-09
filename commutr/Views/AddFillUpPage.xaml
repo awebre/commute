@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -34,7 +34,7 @@
                     <Entry Grid.Row="4" Grid.Column="1" Text="{Binding FillUp.Total, Mode=OneWay}" IsEnabled="False" />
                 </Grid>
                 <Label Text="Location" FontSize="Medium"></Label>
-                <Picker ItemsSource="{Binding Places}"></Picker>
+                <Picker Title="Select a Place" ItemsSource="{Binding Locations}" ItemDisplayBinding="{Binding Display}" SelectedItem="{Binding Location, Mode=TwoWay}" ></Picker>
                 <Label Text="Fuel Economy" FontSize="Medium" />
                 <Label Text="{Binding FillUp.MPG, Mode=OneWay}" />
                 <Label Text="Notes" FontSize="Medium" />

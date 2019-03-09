@@ -13,7 +13,7 @@ namespace commutr.Views
             InitializeComponent();
 
             AddFillUpViewModel vm;
-            BindingContext = vm =  App.Resolver.Resolve<AddFillUpViewModel>();
+            BindingContext = vm = App.Resolver.Resolve<AddFillUpViewModel>();
             if (fillUp != null)
             {
                 vm.FillUp = fillUp;
@@ -32,7 +32,15 @@ namespace commutr.Views
         {
             base.OnAppearing();
 
-            await ((AddFillUpViewModel) BindingContext).GetNearbyPlaces();
+            var viewModel = (AddFillUpViewModel)BindingContext;
+            if (viewModel.FillUp == null)
+            {
+                await viewModel.GetNearbyPlaces();
+            }
+            else
+            {
+                await viewModel.GetExistingPlaces();
+            }
         }
     }
 }

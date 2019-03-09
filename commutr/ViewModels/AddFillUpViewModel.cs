@@ -14,20 +14,24 @@ namespace commutr.ViewModels
     {
         private readonly IDataStore<FillUp> fillUpsDataStore;
         private readonly IDataStore<Vehicle> vehicleDataStore;
+        private readonly IDataStore<Location> locationDataStore;
         private readonly IPlacesService placesService;
         private FillUp fillUp;
-        private List<Place> places;
+        private List<Location> locations;
+        private Location location;
 
         public AddFillUpViewModel(
-            IDataStore<FillUp> fillUpsDataStore, 
-            IDataStore<Vehicle> vehicleDataStore, 
+            IDataStore<FillUp> fillUpsDataStore,
+            IDataStore<Vehicle> vehicleDataStore,
+            IDataStore<Location> locationDataStore,
             IPlacesService placesService)
         {
             this.fillUpsDataStore = fillUpsDataStore;
             this.vehicleDataStore = vehicleDataStore;
+            this.locationDataStore = locationDataStore;
             this.placesService = placesService;
 
-            SaveFillUpCommand = new Command(ExecuteSaveFillUpCommand);
+            SaveFillUpCommand = new Command(async () => await ExecuteSaveFillUpCommand());
             if (fillUp == null)
             {
                 fillUp = new FillUp();
@@ -43,38 +47,72 @@ namespace commutr.ViewModels
             set => fillUp = value;
         }
 
-        public List<Place> Places
+        public List<Location> Locations
         {
-            get => places;
-            set => places = value;
+            get => locations;
+            set => locations = value;
+        }
+
+        public Location Location
+        {
+            get => location;
+            set => location = value;
         }
 
         public async Task GetNearbyPlaces()
         {
-            places = await placesService.GetNearByPlaces();
+            Locations = await placesService.GetNearByPlaces();
+        }
+
+        public async Task GetExistingPlaces()
+        {
+            if (fillUp != null && fillUp.LocationId.HasValue)
+            {
+                var existingLocation = await locationDataStore.GetItemAsync(fillUp.LocationId.Value);
+                Locations = await locationDataStore.GetItemsAsync();
+                Location = existingLocation;
+            }
         }
 
         public ICommand SaveFillUpCommand { get; }
 
-        private void ExecuteSaveFillUpCommand()
+        private async Task ExecuteSaveFillUpCommand()
         {
+            if (location != null)
+            {
+                var location = locationDataStore.GetItemsAsync().Result.FirstOrDefault(x => x.PlaceId == this.location.PlaceId);
+                if (location == null)
+                {
+                    fillUp.LocationId = await locationDataStore.AddItemAsync(new Location
+                    {
+                        PlaceId = this.location.PlaceId,
+                        Name = this.location.Name,
+                        Address = this.location.Address
+                    });
+                }
+                else
+                {
+                    fillUp.LocationId = location.Id;
+                }
+            }
+
             if (fillUp.Id == 0)
             {
                 var vehicle = vehicleDataStore.GetItemsAsync().Result.FirstOrDefault(x => x.Id == fillUp.VehicleId);
                 if (vehicle != null)
                 {
                     vehicle.Odometer += fillUp.Distance;
-                    vehicleDataStore.UpdateItemAsync(vehicle);
+                    await vehicleDataStore.UpdateItemAsync(vehicle);
                 }
-                
-                fillUpsDataStore.AddItemAsync(fillUp);
+
+                await fillUpsDataStore.AddItemAsync(fillUp);
             }
             else
-            {         
-                fillUpsDataStore.UpdateItemAsync(fillUp);
+            {
+                await fillUpsDataStore.UpdateItemAsync(fillUp);
             }
 
-            Application.Current.MainPage.Navigation.PopAsync();
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
     }
 }

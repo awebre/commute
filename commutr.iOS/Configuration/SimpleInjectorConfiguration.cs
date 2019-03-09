@@ -1,4 +1,5 @@
-﻿using commutr.Services;
+﻿using commutr.Helpers;
+using commutr.Services;
 using SimpleInjector;
 
 namespace commutr.iOS.Configuration

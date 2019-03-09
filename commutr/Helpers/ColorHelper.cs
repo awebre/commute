@@ -1,6 +1,6 @@
 using Xamarin.Forms;
 
-namespace commutr
+namespace commutr.Helpers
 {
     public static class ColorHelper
     {
@@ -16,7 +16,7 @@ namespace commutr
 
         private static int GetIntHexValue(this double value)
         {
-            return (int) value * 255;
+            return (int)value * 255;
         }
     }
 }

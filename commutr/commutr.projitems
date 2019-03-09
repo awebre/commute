@@ -27,9 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)ColorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateToStringConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GoogleApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DistanceUnits.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FillUp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FuelUnits.cs" />
@@ -73,6 +71,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\ReportPage.xaml.cs">
       <DependentUpon>ReportPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Location.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ColorHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\GoogleApiHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\LocationDataStoreExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\VehiclePage.xaml">
@@ -90,5 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
   </ItemGroup>
 </Project>

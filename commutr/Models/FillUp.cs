@@ -35,5 +35,8 @@ namespace commutr.Models
 
         [Indexed]
         public int VehicleId { get; set; }
+
+        [Indexed]
+        public int? LocationId { get; set; }
     }
 }

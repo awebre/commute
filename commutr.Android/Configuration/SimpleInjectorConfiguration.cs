@@ -1,3 +1,4 @@
+using commutr.Helpers;
 using commutr.Services;
 using SimpleInjector;
 
@@ -9,9 +10,9 @@ namespace commutr.Droid.Configuration
         {
             var container = new Container();
             //register android specific implementations here
-            
+
             container.Register<IPlacesService>(() => new GooglePlacesService(GoogleApiHelper.AndroidApiKey));
-            
+
             return container;
         }
     }
