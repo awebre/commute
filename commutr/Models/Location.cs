@@ -1,10 +1,11 @@
 ﻿using System;
 using commutr.Services;
 using SQLite;
+using System.ComponentModel;
 
 namespace commutr.Models
 {
-    public class Location : IIdentifiable
+    public class Location : IIdentifiable, INotifyPropertyChanged
     {
         public Location()
         {
@@ -29,5 +30,7 @@ namespace commutr.Models
         public string Address { get; set; }
 
         public string Display => $"{Name} - {Address}";
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

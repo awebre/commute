@@ -7,5 +7,7 @@ namespace commutr.Services
     public interface IPlacesService
     {
         Task<List<Location>> GetNearByPlaces();
+
+        Task<Location> RefreshPlaceId(Location location);
     }
 }

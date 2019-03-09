@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using commutr.Models;
 using commutr.ViewModels;
 using Xamarin.Forms;
@@ -8,6 +9,7 @@ namespace commutr.Views
 {
     public partial class AddFillUpPage : ContentPage
     {
+        private readonly bool isNewFillUp = false;
         public AddFillUpPage(int vehicleId, FillUp fillUp = null)
         {
             InitializeComponent();
@@ -20,6 +22,7 @@ namespace commutr.Views
             }
             else
             {
+                isNewFillUp = true;
                 vm.FillUp = new FillUp
                 {
                     VehicleId = vehicleId,
@@ -33,13 +36,13 @@ namespace commutr.Views
             base.OnAppearing();
 
             var viewModel = (AddFillUpViewModel)BindingContext;
-            if (viewModel.FillUp == null)
+            if (isNewFillUp)
             {
-                await viewModel.GetNearbyPlaces();
+                await Task.Run(() => viewModel.GetNearbyPlaces());
             }
             else
             {
-                await viewModel.GetExistingPlaces();
+                await Task.Run(() => viewModel.GetExistingPlaces());
             }
         }
     }

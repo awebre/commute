@@ -66,11 +66,13 @@ namespace commutr.ViewModels
 
         public async Task GetExistingPlaces()
         {
-            if (fillUp != null && fillUp.LocationId.HasValue)
+            if (fillUp != null)
             {
-                var existingLocation = await locationDataStore.GetItemAsync(fillUp.LocationId.Value);
                 Locations = await locationDataStore.GetItemsAsync();
-                Location = existingLocation;
+                if (fillUp.LocationId.HasValue)
+                {
+                    Location = locations.FirstOrDefault(x => x.Id == fillUp.LocationId);
+                }
             }
         }
 

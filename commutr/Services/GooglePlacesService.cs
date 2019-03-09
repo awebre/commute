@@ -5,6 +5,9 @@ using Xamarin.Essentials;
 using commutr.Models;
 using GeoLocation = Xamarin.Essentials.Location;
 using Location = commutr.Models.Location;
+using Xamarin.Forms.Internals;
+using System.Net.Http;
+using System.Linq;
 
 namespace commutr.Services
 {
@@ -37,7 +40,7 @@ namespace commutr.Services
                 url += $"&locationbias=circle:2000@{geolocation.Latitude},{geolocation.Longitude}";
             }
 
-            var result = await restService.GetAsync<GooglePlaceResult>(url);
+            var result = await restService.GetAsync<GooglePlaceSearchResult>(url);
 
             var places = new List<Location>();
             result.candidates.ForEach(x => places.Add(new Location
@@ -50,7 +53,27 @@ namespace commutr.Services
             return places;
         }
 
-        private class GooglePlaceResult
+        public async Task<List<Location>> RefreshPlaceIds(IEnumerable<Location> locations)
+        {
+            List<Task<Location>> locationRefreshTask = new List<Task<Location>>();
+            foreach (var location in locations)
+            {
+                locationRefreshTask.Add(RefreshPlaceId(location));
+            }
+
+            var refreshedLocations = await Task.WhenAll(locationRefreshTask);
+            return locations.ToList();
+        }
+
+        public async Task<Location> RefreshPlaceId(Location location)
+        {
+            var result = await restService.GetAsync<GooglePlaceDetailResult>(PlaceDetailsUrl + location.PlaceId);
+            location.PlaceId = result.result.place_id;
+
+            return location;
+        }
+
+        private class GooglePlaceSearchResult
         {
             public List<GooglePlace> candidates { get; set; }
 
@@ -66,7 +89,16 @@ namespace commutr.Services
             public string name { get; set; }
         }
 
+        private class GooglePlaceDetailResult
+        {
+            public GooglePlace result { get; set; }
+        }
+
+        private string PlaceApiBaseUrl => "https://maps.googleapis.com/maps/api/place";
+
         private string FindPlaceUrl =>
-            $"https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=gas&inputtype=textquery&fields=formatted_address,name,place_id&key={apiKey}";
+            $"{PlaceApiBaseUrl}/findplacefromtext/json?input=gas&inputtype=textquery&fields=formatted_address,name,place_id&key={apiKey}";
+
+        private string PlaceDetailsUrl => $"{PlaceApiBaseUrl}/details/json?key={apiKey}&fields=place_id&place_id=";
     }
 }

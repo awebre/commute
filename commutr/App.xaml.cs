@@ -6,6 +6,9 @@ using commutr.Views;
 using SimpleInjector;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Threading.Tasks;
+using System.Collections;
+using System.Collections.Generic;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -18,10 +21,10 @@ namespace commutr
             InitializeComponent();
 
             container.Register<DependencyResolver>();
-            
+
             container.Register(typeof(IDataStore<>), typeof(SqliteDataStore<>));
             container.Register<IGeolocationService, GeolocationService>();
-            
+
             container.Verify();
 
             Resolver = container.GetInstance<DependencyResolver>();
@@ -39,9 +42,27 @@ namespace commutr
             }
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
             // Handle when your app starts
+            var locationDataStore = Resolver.Resolve<IDataStore<Location>>();
+            var placesService = Resolver.Resolve<IPlacesService>();
+
+            await Task.Run(async () =>
+            {
+                List<Task<int>> locationTasks = new List<Task<int>>();
+                var locations = await locationDataStore.GetItemsAsync();
+                foreach (var location in locations)
+                {
+                    locationTasks.Add(await Task.Run(async () =>
+                    {
+                        var updatedLocation = await placesService.RefreshPlaceId(location);
+                        return locationDataStore.UpdateItemAsync(updatedLocation);
+                    }));
+                }
+
+                Task.WaitAll(locationTasks.ToArray());
+            });
         }
 
         protected override void OnSleep()
