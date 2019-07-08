@@ -26,6 +26,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MaintenanceLogPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -45,6 +49,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FillUpViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LocationsMapViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MaintenanceLogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MyVehicleViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ReportViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\VehicleCrudViewModel.cs" />
@@ -85,6 +90,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Services\IGeocodingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\GeocodingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MaintenanceLogPage.xaml.cs">
+      <DependentUpon>MaintenanceLogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MaintenanceLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\VehiclePage.xaml">

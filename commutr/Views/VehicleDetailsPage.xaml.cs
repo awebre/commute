@@ -19,7 +19,7 @@ namespace commutr.Views
             Children.Add(new FillUpPage(viewModel.Item.Id));
             Children.Add(new MyVehiclePage(viewModel.Item.Id));
             Children.Add(new ReportPage(viewModel.Item.Id));
-            Children.Add(new LocationsMapPage(viewModel.Item.Id));
+            Children.Add(new MaintenanceLogPage(viewModel.Item.Id));
         }
 
         public VehicleDetailsPage()
